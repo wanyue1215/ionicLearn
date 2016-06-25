@@ -24,15 +24,33 @@ angular.module('starter.controllers', [])
 .controller('personList',function($scope,$http){
 	$http.get('js/data.json').success(function(data){
 		$scope.lists = data.artists;
-		$scope.moveItem = function(item,formIndex,toIndex){
-			$scope.lists.splice(formIndex,1);
-			$scope.lists.splice(toIndex,0,item);
-		};
-		$scope.onItemDelete = function(item){
-			$scope.lists.splice($scope.lists.indexOf(item),1)
-		};
 	});
+
+	$scope.data = {showDelete:false , showReorder:false};
+	$scope.moveItem = function(item,formIndex,toIndex){
+		$scope.lists.splice(formIndex,1);
+		$scope.lists.splice(toIndex,0,item);
+	};
+
+	$scope.onItemDelete = function(item){
+		$scope.lists.splice($scope.lists.indexOf(item),1)
+	};
+
+	$scope.toggleStar = function(item){
+		item.star = !item.star;
+	};
+
+	$scope.doRefresh = function(){
+		console.warn("refresh");
+		$http.get('js/data.json').success(function(data){
+			$scope.lists = data.artists;
+			$scope.$broadcast('scroll.refreshComplete')
+		});
+	};
 });
+
+
+
 
 
 

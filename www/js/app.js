@@ -65,10 +65,17 @@ angular.module('starter', ['ionic','starter.controllers','starter.logins'])
           controller: 'person'
         }
       }
-      // templateUrl: 'view/person.html',
-      // controller: 'person',
     })
 
+    .state('main.person-detail', {
+      url: '/person/:pid',
+      views: {
+        'main-person': {
+          templateUrl: 'view/person-detail.html',
+          controller: 'person'
+        }
+      }
+    })
      .state('main.calendar', {
       url: '/calendar',
       views: {
@@ -77,8 +84,6 @@ angular.module('starter', ['ionic','starter.controllers','starter.logins'])
           controller: 'calendar'
         }
       }
-      // templateUrl: 'view/calendar.html',
-      // controller: 'calendar',
     });
 
   $urlRouterProvider.otherwise('/login');

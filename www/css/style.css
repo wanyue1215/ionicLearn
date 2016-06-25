@@ -1,6 +1,26 @@
 /* Empty. Add your own CSS if you like */
 
 .DefaultImgSize {
-	width: 100px;
-	height: 100px;
+	width: 100px
+	height: 100px
+}
+
+.star>.item-content {
+	background-color:#EEE8D6 !important;
+}
+
+.splash {
+	background: url(../img/skyline.jpg) no-repeat center center fixed ;
+	-webkit- background-size: cover;
+	-moz- background-size: cover;
+	-o- background-size: cover;
+	background-size: cover;
+}
+
+.branding {
+	width: 150px;
+	margin: 0 auto;
+	max-width: 200px;
+	margin-top: 100px;
+	text-align: center;
 }

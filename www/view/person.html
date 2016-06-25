@@ -1,15 +1,19 @@
-
+ 
 <ion-view view-title="Person" ng-controller="personList">
-	<ion-header-bar class="bar-positive">
+
+	<!-- <ion-header-bar class="bar-positive"> -->
+	<ion-nav-buttons side="primary">
   	<button class="button icon button-clear ion-minus-circled" 
   					ng-click="data.showDelete = !data.showDelete; data.showReorder = false" ></button>
 
-  	<h2 class="title">Person</h2>
+  	<!-- <h2 class="title">Person</h2> -->
+	</ion-nav-buttons>
 
+  <ion-nav-buttons side="secondary">
   	<button class="button icon button-clear ion-navicon" 
   					ng-click="data.showReorder = !data.showReorder;data.showDelete = false"></button>
-
-	</ion-header-bar>
+  </ion-nav-buttons>
+	<!-- </ion-header-bar> -->
 
 	<div class="bar bar-subheader item-input-inset bar-light">
 		<label class="item-input-wrapper">
@@ -18,16 +22,28 @@
 		</label>
 	</div>
 
+	<!-- content -->
 	<ion-content class="has-subheader">
+
+		<ion-refresher on-refresh="doRefresh()">
+		</ion-refresher>
+
 		<ion-list show-reorder="data.showReorder" show-delete="data.showDelete">
 
-			<ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="item in lists | filter: query" >
-				<img src="img/{{item.shortname}}_tn.jpg" alt="{{item.name}} Photo" class="DefaultImgSize">
+			<ion-item ng-class="{'star': item.star}" href="#/main/person/{{item.shortname}}"
+								class="item-thumbnail-left item-text-wrap item-icon-right" 
+								ng-repeat="item in lists | filter: query" >
+
+				<img ng-src="img/{{item.shortname}}_tn.jpg" alt="{{item.name}} Photo" class="DefaultImgSize">
 				<h2>{{item.name}}</h2>
 				<h3>{{item.reknown}}</h3>
 				<p>{{item.bio | limitTo:100}}{{item.bio.length > 150 ? '&hellip;' : ''}} </p>
 
-				<button></button>
+				<button class="button button-clear icon ion-star button-assertive" ng-click="toggleStar(item)" ng-show="item.star"></button>
+
+				<ion-option-button class="button-dark" ng-click="toggleStar(item)">
+					<i class="icon ion-star"></i>
+				</ion-option-button>
 
 				<ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
 				<ion-reorder-button class ='ion-navicon' on-reorder="moveItem(item,$fromIndex,$toIndex)"></ion-reorder-button>
